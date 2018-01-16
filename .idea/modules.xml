@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/customer-api/customer-api.iml" filepath="$PROJECT_DIR$/customer-api/customer-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/customer-api-build.iml" filepath="$PROJECT_DIR$/.idea/modules/customer-api-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customer-impl/customer-impl.iml" filepath="$PROJECT_DIR$/customer-impl/customer-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/customer-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/customer-impl-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-management-lagom.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-management-lagom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-management-lagom-api.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-management-lagom-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-management-lagom-api-build.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-management-lagom-api-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-management-lagom-build.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-management-lagom-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-management-lagom-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-management-lagom-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-management-lagom-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-management-lagom-impl-build.iml" />
+    </modules>
+  </component>
+</project>
