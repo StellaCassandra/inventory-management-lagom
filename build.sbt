@@ -7,29 +7,11 @@ scalaVersion in ThisBuild := "2.12.4"
 val macwire = "com.softwaremill.macwire" %% "macros" % "2.3.0" % "provided"
 val scalaTest = "org.scalatest" %% "scalatest" % "3.0.4" % Test
 
+lagomCassandraCleanOnStart in ThisBuild := true
+lagomServiceLocatorEnabled in ThisBuild := true
+
 lazy val `inventory-management-lagom` = (project in file("."))
-  .aggregate(`inventory-management-lagom-api`, `inventory-management-lagom-impl`, `customer-api`, `customer-impl`)
-
-lazy val `inventory-management-lagom-api` = (project in file("inventory-management-lagom-api"))
-  .settings(
-    libraryDependencies ++= Seq(
-      lagomScaladslApi
-    )
-  )
-
-lazy val `inventory-management-lagom-impl` = (project in file("inventory-management-lagom-impl"))
-  .enablePlugins(LagomScala)
-  .settings(
-    libraryDependencies ++= Seq(
-      lagomScaladslPersistenceCassandra,
-      lagomScaladslKafkaBroker,
-      lagomScaladslTestKit,
-      macwire,
-      scalaTest
-    )
-  )
-  .settings(lagomForkedTestSettings: _*)
-  .dependsOn(`inventory-management-lagom-api`)
+  .aggregate(`customer-api`, `customer-impl`)
 
 lazy val `customer-api` = (project in file("customer-api"))
   .settings(

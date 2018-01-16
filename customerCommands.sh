@@ -1,15 +1,71 @@
-RegisterNewCustomer=$(cat <<EOF
+alias availableServices='curl -H "Content-Type: application/json" -X GET http://localhost:9008/services'
+
+function registerNewCustomer()
+{
+curl -H "Content-Type: application/json" -X POST -d "$@" http://localhost:9000/api/customers
+}
+
+alias retrieveCustomer='curl -H "Content-Type: application/json" -X GET http://localhost:9000/api/customers/"$CustomerId"'
+
+function relocateCustomer()
+{
+curl -H "Content-Type: application/json" -X POST -d "$@" http://localhost:9000/api/customers/"$CustomerId"/relocate
+}
+
+function nameChangeCustomer()
+{
+curl -H "Content-Type: application/json" -X POST -d "$@" http://localhost:9000/api/customers/"$CustomerId"/name-change
+}
+
+alias freezeCustomerAccount='curl -H "Content-Type: application/json" -X GET http://localhost:9000/api/customers/"$CustomerId"/freeze-account'
+alias retrieveAccountStatus='curl -H "Content-Type: application/json" -X GET http://localhost:9000/api/customers/"$CustomerId"/account-status'
+
+CustomerCassandra=$(cat <<EOF
 {"customerId": "Cassandra",
 "customerName" : {"lastName" : "Tasai", "firstName" : "Cassandra"},
-"customerAddress" : {"street" : "Am Lindenbaum", "streetNumber" : "1", "postalCode" : "1323", "city": "Augsburg"}
+"customerAddress" : {"street" : "Am Lindenbaum", "streetNumber" : "1", "postalCode" : "86150", "city": "Augsburg"}
 }
 EOF
 )
 
-RetrieveCustomer="Cassandra"
+CustomerSeraphina=$(cat <<EOF
+{"customerId": "Seraphina",
+"customerName" : {"lastName" : "Tasai", "firstName" : "Seraphina"},
+"customerAddress" : {"street" : "Am Neumond", "streetNumber" : "12", "postalCode" : "80331", "city": "Munich"}
+}
+EOF
+)
 
-alias registerNewCustomer='curl -H "Content-Type: application/json" -X POST -d "$RegisterNewCustomer" http://localhost:9000/api/customers'
-alias retrieveCustomer='curl -H "Content-Type: application/json" -X GET http://localhost:9000/api/customers/$RetrieveCustomer'
-alias relocateCustomer='curl -H "Content-Type: application/json" -X POST http://localhost:9000/api/customers/$RetrieveCustomer/relocate'
-alias nameChangeCustomer='curl -H "Content-Type: application/json" -X POST http://localhost:9000/api/customers/$RetrieveCustomer/name-change'
-alias freezeCustomerAccount='curl -H "Content-Type: application/json" -X GET http://localhost:9000/api/customers/$RetrieveCustomer/freeze-account'
+CustomerRuby=$(cat <<EOF
+{"customerId": "Ruby",
+"customerName" : {"lastName" : "Tasai", "firstName" : "Ruby"},
+"customerAddress" : {"street" : "Am Königsplatz", "streetNumber" : "5b", "postalCode" : "10115", "city": "Berlin"}
+}
+EOF
+)
+
+availableServices
+registerNewCustomer "$CustomerCassandra"
+registerNewCustomer "$CustomerSeraphina"
+registerNewCustomer "$CustomerRuby"
+
+CustomerId="Cassandra"
+newAddress=$(cat <<EOF
+{"street" : "Am Tannenbaum", "streetNumber" : "5c", "postalCode" : "86150", "city": "Augsburg"}
+EOF
+)
+
+newName=$(cat <<EOF
+{"lastName" : "Tasai", "firstName" : "Cassandra Stella"}
+EOF
+)
+
+retrieveCustomer
+relocateCustomer "$newAddress"
+nameChangeCustomer "$newName"
+retrieveCustomer
+
+CustomerId="Ruby"
+retrieveAccountStatus
+freezeCustomerAccount
+retrieveAccountStatus

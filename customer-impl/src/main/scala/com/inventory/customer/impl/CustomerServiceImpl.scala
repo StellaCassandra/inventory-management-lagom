@@ -8,7 +8,7 @@ import com.lightbend.lagom.scaladsl.persistence.PersistentEntityRegistry
 
 import scala.concurrent.{ExecutionContext, Future}
 
-class CustomerServiceImpl(persistentEntityRegistry: PersistentEntityRegistry) (implicit ec: ExecutionContext) extends CustomerService
+class CustomerServiceImpl(persistentEntityRegistry: PersistentEntityRegistry)(implicit ec: ExecutionContext) extends CustomerService
 {
   override def registerNewCustomer(): ServiceCall[Customer, Done] =
     newCustomer =>
@@ -43,6 +43,13 @@ class CustomerServiceImpl(persistentEntityRegistry: PersistentEntityRegistry) (i
     {
       val ref = customerEntityRef(userId)
       ref.ask(RetrieveCustomer()).map(_.customer.getOrElse(throw NotFound(s"User $userId not found.")))
+    }
+
+  override def retrieveAccountStatus(userId: String): ServiceCall[NotUsed, CustomerAccountStatus] =
+    _ =>
+    {
+      val ref = customerEntityRef(userId)
+      ref.ask(RetrieveAccountStatus()).map(_.accountStatus.getOrElse(throw NotFound(s"User $userId not found.")))
     }
 
   private def customerEntityRef(userId: String) =

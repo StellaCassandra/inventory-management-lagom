@@ -24,6 +24,7 @@ trait CustomerService extends Service
 
   // Queries
   def retrieveCustomer(userId: String): ServiceCall[NotUsed, Customer]
+  def retrieveAccountStatus(userId: String): ServiceCall[NotUsed, CustomerAccountStatus]
 
   override def descriptor: Descriptor =
   {
@@ -33,7 +34,8 @@ trait CustomerService extends Service
       pathCall("/api/customers", registerNewCustomer _),
       pathCall("/api/customers/:userId/relocate", relocateCustomer _),
       pathCall("/api/customers/:userId/name-change", nameChangeCustomer _),
-      pathCall("/api/customers/:userId/freeze-account", freezeCustomerAccount _)
+      pathCall("/api/customers/:userId/freeze-account", freezeCustomerAccount _),
+      pathCall("/api/customers/:userId/account-status", retrieveAccountStatus _)
     ).withAutoAcl(true)
   }
 }

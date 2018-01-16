@@ -45,6 +45,11 @@ class CustomerEntity extends PersistentEntity
         case (cmd, ctx, state) =>
           ctx.reply(RetrieveCustomerReply(None))
       }
+      .onReadOnlyCommand[RetrieveAccountStatus, RetrieveAccountStatusReply]
+      {
+        case (cmd, ctx, state) =>
+          ctx.reply(RetrieveAccountStatusReply(None))
+      }
       .onEvent(eventHandler)
 
     case CustomerState(Some(customer), _) => Actions()
@@ -88,6 +93,11 @@ class CustomerEntity extends PersistentEntity
       {
         case (cmd, ctx, state) =>
           ctx.reply(RetrieveCustomerReply(Some(customer)))
+      }
+      .onReadOnlyCommand[RetrieveAccountStatus, RetrieveAccountStatusReply]
+      {
+        case (cmd, ctx, state) =>
+          ctx.reply(RetrieveAccountStatusReply(Some(CustomerAccountStatus(!state.accountFrozen))))
       }
       .onEvent(eventHandler)
   }
