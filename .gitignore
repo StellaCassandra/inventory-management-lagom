@@ -1,6 +1,7 @@
 target
 ideatarget
 .target
+.idea
 bin
 .cache
 .cache-main
