@@ -87,7 +87,7 @@ class PurchaseEntity extends PersistentEntity
       val removalQuantity = action.quantity mapValues ((q: Int) => -q)
       //@formatter:off
       val new_quantity = (removalQuantity |+| state.purchaseOrder.quantity)
-        .filter{ case (k, v) => v < 0 }
+        .filter{ case (k, v) => v > 0 }
       //@formatter:on
       val newOrder = state.purchaseOrder.copy(quantity = new_quantity)
       PurchaseState(newOrder)

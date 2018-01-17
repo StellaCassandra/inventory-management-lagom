@@ -61,7 +61,7 @@ class PurchaseServiceImpl(persistentEntityRegistry: PersistentEntityRegistry, cu
     _ =>
     {
       val response: Future[Seq[OrderSummary]] =
-        cassandraSession.selectAll(s"SELECT order_id, itemtotal FROM purchase_summary WHERE customer_id = '$customerId'")
+        cassandraSession.selectAll(s"SELECT customer_id, order_id, itemtotal FROM purchase_summary WHERE customer_id='$customerId'")
           .map
           { rows =>
             rows.map

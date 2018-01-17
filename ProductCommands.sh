@@ -1,3 +1,4 @@
+#!/bin/bash
 function registerNewProduct()
 {
 curl -H "Content-Type: application/json" -X POST -d "$@" http://localhost:9000/api/products
@@ -30,5 +31,5 @@ registerNewProduct "$ProductTrain"
 registerNewProduct "$ProductRobot"
 registerNewProduct "$ProductCompSci"
 
-ProductId="Toy Robot"
+ProductId="ToyRobot"
 retrieveProduct

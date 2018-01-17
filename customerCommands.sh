@@ -1,3 +1,4 @@
+#!/bin/bash
 alias availableServices='curl -H "Content-Type: application/json" -X GET http://localhost:9008/services'
 
 function registerNewCustomer()
@@ -45,6 +46,8 @@ EOF
 )
 
 availableServices
+# purchase-service, product-service, kafka_native, customer-service, cas_native
+
 registerNewCustomer "$CustomerCassandra"
 registerNewCustomer "$CustomerSeraphina"
 registerNewCustomer "$CustomerRuby"
@@ -64,8 +67,12 @@ retrieveCustomer
 relocateCustomer "$newAddress"
 nameChangeCustomer "$newName"
 retrieveCustomer
+# {"customerId":"Cassandra","customerName":{"lastName":"Tasai","firstName":"Cassandra Stella"},
+# "customerAddress":{"street":"Am Tannenbaum","streetNumber":"5c","postalCode":"86150","city":"Augsburg"}}
 
 CustomerId="Ruby"
 retrieveAccountStatus
+# {"isSolvent":true}
 freezeCustomerAccount
 retrieveAccountStatus
+# {"isSolvent":false}
