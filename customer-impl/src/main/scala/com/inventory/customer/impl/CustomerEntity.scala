@@ -20,7 +20,7 @@ class CustomerEntity extends PersistentEntity
 
   override def initialState: CustomerState = CustomerState(None)
 
-  // Command handler
+  // Command and query handler
   override def behavior: Behavior =
   {
     case CustomerState(None, _) => Actions()

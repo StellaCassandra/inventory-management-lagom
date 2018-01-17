@@ -42,3 +42,4 @@ object RetrieveAccountStatusReply
 {
   implicit val format: Format[RetrieveAccountStatusReply] = Json.format
 }
+

@@ -12,7 +12,7 @@ function relocateCustomer()
 curl -H "Content-Type: application/json" -X POST -d "$@" http://localhost:9000/api/customers/"$CustomerId"/relocate
 }
 
-function nameChangeCustomer()
+function nameChangeCustomer()0
 {
 curl -H "Content-Type: application/json" -X POST -d "$@" http://localhost:9000/api/customers/"$CustomerId"/name-change
 }
