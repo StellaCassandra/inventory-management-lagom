@@ -18,7 +18,6 @@ import scala.concurrent.ExecutionContext
 class PurchaseQueryModelBuilder(session: CassandraSession, readSide: CassandraReadSide)(implicit ec: ExecutionContext)
   extends ReadSideProcessor[PurchaseEvent]
 {
-  // select  id, itemtotal from purchase_summary
   override def buildHandler(): ReadSideProcessor.ReadSideHandler[PurchaseEvent] =
   {
     val builder = readSide.builder[PurchaseEvent]("purchase_summary")
